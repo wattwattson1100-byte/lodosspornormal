@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Lodosspor Akış</title>
+    <style>
+        body { background: #0f172a; color: white; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; }
+        .feed-container { width: 100%; max-width: 500px; }
+        .post { background: #1e293b; padding: 20px; border-radius: 12px; margin-bottom: 20px; }
+        .actions { margin-top: 10px; display: flex; gap: 15px; }
+        .admin-panel { background: #334155; padding: 20px; border-radius: 12px; margin-bottom: 40px; }
+    </style>
+</head>
+<body>
+
+    <div class="admin-panel">
+        <h3>İçerik Ekle (Admin)</h3>
+        <input type="text" id="postText" placeholder="Kulüp haberi gir...">
+        <button onclick="addPost()">Paylaş</button>
+    </div>
+
+    <div class="feed-container" id="feed"></div>
+
+    <script>
+        function addPost() {
+            let text = document.getElementById('postText').value;
+            let feed = document.getElementById('feed');
+            
+            let post = document.createElement('div');
+            post.className = 'post';
+            post.innerHTML = `
+                <p>${text}</p>
+                <div class="actions">
+                    <button onclick="like(this)">❤️ Beğen</button>
+                    <input type="text" placeholder="Yorum yaz...">
+                </div>
+            `;
+            feed.prepend(post); // En üste ekler
+            document.getElementById('postText').value = '';
+        }
+
+        function like(btn) {
+            btn.style.color = "red";
+            btn.innerText = "❤️ Beğenildi";
+        }
+    </script>
+</body>
+</html>
